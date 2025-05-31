@@ -1,0 +1,282 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    font-family: 'Poppins', sans-serif;
+    color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    padding: 1rem;
+  }
+  header {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  header h1 {
+    font-weight: 600;
+    font-size: 3rem;
+    letter-spacing: 0.1em;
+    margin: 0.5rem 0 0.8rem;
+    user-select: none;
+  }
+  #profile-pic {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    cursor: default;
+    user-select: none;
+  }
+  #about {
+    max-width: 700px;
+    background: rgba(255,255,255,0.15);
+    padding: 1.2rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+    margin-bottom: 3rem;
+    font-weight: 300;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    text-align: center;
+    user-select: text;
+  }
+  .cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 900px;
+  }
+  .card {
+    background: linear-gradient(145deg, #3b3b98, #2a2a72);
+    border-radius: 20px;
+    width: 250px;
+    height: 350px;
+    box-shadow:
+      0 8px 15px rgba(255,255,255,0.15),
+      inset 0 0 8px rgba(0,0,0,0.9);
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.6rem 1.2rem;
+    position: relative;
+  }
+  .card:hover {
+    transform: translateY(-12px) rotate(-1deg);
+    box-shadow:
+      0 16px 25px rgba(255, 255, 255, 0.4),
+      inset 0 0 15px rgba(0,0,0,0.9);
+  }
+  .card .icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    user-select: none;
+  }
+  .card h2 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    margin: 0 0 0.2rem 0;
+  }
+  .card .subtitle {
+    font-weight: 300;
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-bottom: 1.8rem;
+  }
+  /* Sub-card container */
+  .subcards {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .subcards.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .subcard {
+    background: linear-gradient(145deg, #4e4eaa, #27276c);
+    border-radius: 15px;
+    width: 70px;
+    height: 110px;
+    box-shadow:
+      0 5px 12px rgba(0,0,0,0.8),
+      inset 0 0 7px rgba(255,255,255,0.15);
+    color: #ddd;
+    text-align: center;
+    user-select: none;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6rem 0.3rem;
+    transition: transform 0.3s ease;
+  }
+  .subcard:hover {
+    transform: translateY(-6px);
+    color: #fff;
+    box-shadow:
+      0 8px 15px rgba(255,255,255,0.8),
+      inset 0 0 12px rgba(0,0,0,0.9);
+  }
+  .subcard .icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.4rem;
+  }
+  .subcard span {
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+  /* Responsive adjustments */
+  @media (max-width: 840px) {
+    .cards-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .card {
+      width: 280px;
+      margin-bottom: 2.5rem;
+      height: 340px;
+    }
+    .subcards {
+      bottom: -125px;
+      width: 100%;
+      transform: translateX(0);
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1> Raj Ranjan </h1>
+  <img id="profile-pic" src="/images/profile.jpeg" alt="Profile Picture" />
+
+</header>
+<section id="about">
+  <p>Hello! I am Raj Ranjan, I am a passionate tech enthuist and aspiring Python developer from India . I am currently diving deep into Pyhton, computer networking and AI. I enjoy working on uninque projects - like my own voice controlled AI assistant and online music player . I use Fedora Linux and love exploring open-source tools, creating efficient and beautiful GUIs and learning how things work under the hood .</p>
+</section>
+<div class="cards-container">
+  <div class="card" id="skills-card" tabindex="0" aria-expanded="false" role="button" aria-controls="skills-subcards" aria-label="Skills">
+    <div class="icon" aria-hidden="true">🛠️</div>
+    <h2>Skills</h2>
+    <div class="subtitle">Click to see more</div>
+    <div class="subcards" id="skills-subcards" role="region" aria-label="Skills details" aria-hidden="true">
+      <a class="subcard" href="https://www.python.org/" target="_blank" aria-label="Visit Python Official Website">
+        <div class="icon">🐍</div>
+        <span>Python</span>
+      </a>
+      
+      <a class="subcard" href="https://platform.openai.com/docs/guides/prompt-engineering" target="_blank" aria-label="Learn about AI Prompting">
+        <div class="icon">🤖</div>
+        <span>AI Prompting</span>
+      </a>
+      
+      <a class="subcard" href="https://www.youtube.com/watch?v=WA5wQeVCKIM" target="_blank" aria-label="Creative Thinking Video">
+        <div class="icon">🎨</div>
+        <span>Creative Thinking</span>
+      </a>
+      
+    </div>
+  </div>
+  <div class="card" id="projects-card" tabindex="0" aria-expanded="false" role="button" aria-controls="projects-subcards" aria-label="Projects">
+    <div class="icon" aria-hidden="true">📁</div>
+    <h2>Projects</h2>
+    <div class="subtitle">Click to see more</div>
+    <div class="subcards" id="projects-subcards" role="region" aria-label="Projects details" aria-hidden="true">
+      <a class="subcard" href="https://climora-aar0.onrender.com/" aria-label="Weather Site Project">
+        <div class="icon">☁️</div>
+        <span>Weather Site</span>
+      </a>
+      
+      <div class="subcard" tabindex="0" aria-label="AI Project">
+        <div class="icon">🧠</div>
+        <span>AI Project</span>
+      </div>
+      <div class="subcard" tabindex="0" aria-label="Music Player Project">
+        <div class="icon">🎵</div>
+        <span>Music Player</span>
+      </div>
+    </div>
+  </div>
+  <div class="card" id="contact-card" tabindex="0" aria-expanded="false" role="button" aria-controls="contact-subcards" aria-label="Contact">
+    <div class="icon" aria-hidden="true">✉️</div>
+    <h2>Contact</h2>
+    <div class="subtitle">Click to see more</div>
+    <div class="subcards" id="contact-subcards" role="region" aria-label="Contact details" aria-hidden="true">
+      <a class="subcard" href="https://www.instagram.com/r_ranjan.in/" target="_blank" aria-label="Instagram Profile">
+        <div class="icon">📸</div>
+        <span>Instagram</span>
+      </a>
+      
+      <a class="subcard" href="https://www.linkedin.com/in/raj-ranjan-54b87a368?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" aria-label="LinkedIn Profile">
+        <div class="icon">🔗</div>
+        <span>LinkedIn</span>
+      </a>
+      
+      <a class="subcard" href="mailto:raj.ranjan.dev@gmail.com?subject=Hi Raj!&body=I saw your portfolio." aria-label="Send Email">
+        <div class="icon">📧</div>
+        <span>Email</span>
+      </a>
+      
+      
+    </div>
+  </div>
+</div>
+<script>
+    // Handles toggle of subcards on main card click or keyboard Enter/Space
+    function setupExpandableCard(cardId, subcardsId) {
+    const card = document.getElementById(cardId);
+    const subcards = document.getElementById(subcardsId);
+    function toggle() {
+      const isVisible = subcards.classList.contains('visible');
+      if (isVisible) {
+        subcards.classList.remove('visible');
+        card.setAttribute('aria-expanded', 'false');
+        subcards.setAttribute('aria-hidden', 'true');
+      } else {
+        subcards.classList.add('visible');
+        card.setAttribute('aria-expanded', 'true');
+        subcards.setAttribute('aria-hidden', 'false');
+      }
+    }
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  }
+  setupExpandableCard('skills-card', 'skills-subcards');
+  setupExpandableCard('projects-card', 'projects-subcards');
+  setupExpandableCard('contact-card', 'contact-subcards');
+</script>
+</body>
+</html>
