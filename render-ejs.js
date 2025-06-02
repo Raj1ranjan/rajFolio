@@ -1,29 +1,35 @@
-// render-ejs.js
-const ejs = require("ejs");
 const fs = require("fs");
 const path = require("path");
+const ejs = require("ejs");
 
-// Paths
 const viewsDir = path.join(__dirname, "views");
 const outputDir = path.join(__dirname, "dist");
 
-// Example pages to convert (add more if needed)
-const pages = ["index", "about", "contact"];
-
-// Make output directory
+// Ensure output directory exists
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir);
 }
 
-// Render and save each page
-pages.forEach((page) => {
-  const filePath = path.join(viewsDir, `${page}.ejs`);
-  const outputPath = path.join(outputDir, `${page}.html`);
+try {
+  const files = fs.readdirSync(viewsDir);
 
-  const html = ejs.render(fs.readFileSync(filePath, "utf-8"), {
-    // pass any template variables here if needed
+  files.forEach((file) => {
+    if (file.endsWith(".ejs")) {
+      const inputPath = path.join(viewsDir, file);
+      const outputPath = path.join(outputDir, file.replace(".ejs", ".html"));
+
+      ejs.renderFile(inputPath, {}, (err, str) => {
+        if (err) {
+          console.error(`❌ Error rendering ${file}:`, err);
+          process.exit(1); // Important: exits so Netlify sees build failed
+        } else {
+          fs.writeFileSync(outputPath, str);
+          console.log(`✅ Rendered ${file} → ${outputPath}`);
+        }
+      });
+    }
   });
-
-  fs.writeFileSync(outputPath, html);
-  console.log(`Rendered: ${page}.ejs → ${page}.html`);
-});
+} catch (err) {
+  console.error("❌ Build failed:", err);
+  process.exit(2);
+}
