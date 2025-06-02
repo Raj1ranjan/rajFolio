@@ -169,6 +169,37 @@
       bottom: -125px;
       width: 100%;
       transform: translateX(0);
+
+      @media (max-width: 480px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  #about {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .card {
+    width: 90%;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .subcards {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    position: static;
+    transform: none;
+  }
+
+  .subcard {
+    width: 80px;
+    height: 100px;
+  }
+}
+
     }
   }
 </style>
@@ -176,7 +207,7 @@
 <body>
 <header>
   <h1> Raj Ranjan </h1>
-  <img id="profile-pic" src="/images/profile.jpeg" alt="Profile Picture" />
+  <img id="profile-pic" src="images/profile.jpeg" alt="Profile Picture" />
 
 </header>
 <section id="about">
